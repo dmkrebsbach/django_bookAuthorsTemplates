@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Book Authors Project</title>
+        <meta charset="utf-8">
+        {% load static%}
+        <link rel="stylesheet" href="{% static 'book_authors_app/css/style.css' %}">
+	</head>
+    <body>
+        <div class="container">
+
+
+            <div>
+                <form action="/authors/create" method="POST" class="AddBox">
+                {%csrf_token%}
+                    <h1>Add An Author</h1>
+                    <h4>First Name:</h4>
+                    <input type="text" name="authorFirstName">
+                    <h4>Last Name:</h4>
+                    <input type="text" name="authorLastName">
+                    <h4>Author Notes:</h4>
+                    <textarea name="authorNotes" class="descBox"></textarea>
+                    <input type="submit" value="Add Author To Your Library" class="button">
+                </form>
+            </div>
+            
+
+            <div class="LibraryTable">
+                <h1>Authors in Library</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Author Name</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for author in authors%}
+                    <tr>
+                        <td>{{author.id}}</td>
+                        <td>{{author.first_name}} {{author.last_name}}</td>
+                        <td class="action"><a href="/authors/{{author.id}}">Learn More</a></td>
+                    </tr>
+                    {% endfor %}    
+                </table>
+            </div>
+            
+            
+        </div>
+    </body>
+</html>

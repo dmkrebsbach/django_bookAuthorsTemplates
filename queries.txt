@@ -1,0 +1,67 @@
+>>> from apps.book_authors_app.models import *
+
+Query: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+>>> cSharp = Book.objects.create(title="C-Sharp", desc="A Book about C-Sharp!")
+>>> java = Book.objects.create(title="Java", desc="A Book about Java")
+>>> python = Book.objects.create(title="Python", desc="A Book about Python3")
+>>> php = Book.objects.create(title="PHP", desc="A Book about PHP")
+>>> ruby = Book.objects.create(title="Ruby", desc="A Book about Ruby!!")
+
+Query: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevksy, William Shakespeare, Lau Tzu
+>>> jausten = Author.objects.create(first_name="Jane", last_name="Austen")
+>>> edickinson = Author.objects.create(first_name="Emily", last_name="Dickinson")
+>>> fdost = Author.objects.create(first_name="Fyodor", last_name="Dostoevsky")
+>>> wshakes = Author.objects.create(first_name="William", last_name="Shakespeare")
+>>> ltzu = Author.objects.create(first_name="Lau", last_name="Tzu")
+	
+Query: Change the name of the C Sharp book to C#	
+>>> title_to_update = Book.objects.get(title="C-Sharp")
+>>> title_to_update.title = "C#"
+>>> title_to_update.save()
+
+Query: Change the first name of the 4th author to Bill	
+>>> author_to_update = Book.objects.get(id=4)
+>>> author_to_update.first_name = "Bill"
+>>> author_to_update.save()
+
+Query: Assign the first author(id=1) to the first 2 books (id=1, id=2)
+Author.objects.get(id=1).books.add(Book.objects.get(id=1))
+Author.objects.get(id=1).books.add(Book.objects.get(id=2))
+
+Query: Assign the second author to the first 3 books	
+>>> Author.objects.get(id=2).books.add(Book.objects.get(id=1))
+>>> Author.objects.get(id=2).books.add(Book.objects.get(id=2))
+>>> Author.objects.get(id=2).books.add(Book.objects.get(id=3))
+
+Query: Assign the third author to the first 4 books	
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=1))
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=2))
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=3))
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=4))
+
+Query: Assign the fourth author to the first 5 books (or in other words, all the books)
+>>> Author.objects.get(id=4).books.add(Book.objects.get(id=1))
+>>> Author.objects.get(id=4).books.add(Book.objects.get(id=2))
+>>> Author.objects.get(id=4).books.add(Book.objects.get(id=3))
+>>> Author.objects.get(id=4).books.add(Book.objects.get(id=4))
+>>> Author.objects.get(id=4).books.add(Book.objects.get(id=5))
+
+Query: Retrieve all the authors for the 3rd book
+>>> Book.objects.get(id=3).authors.all() --output--> <QuerySet [<Author object: Emily Dickinson>, <Author object: Fyodor Dostoevsky>, <Author object: William Shakespeare>]>
+
+Query: Remove the first author of the 3rd book	
+>>> Book.objects.get(id=3).authors.remove(Author.objects.get(id=2))
+>>> Book.objects.get(id=3).authors.all() --output--> <QuerySet [<Author object: Fyodor Dostoevsky>, <Author object: William Shakespeare>]>
+
+Query: Add the 5th author as one of the authors of the 2nd book
+>>> Author.objects.get(id=5).books.add(Book.objects.get(id=2))
+>>> Book.objects.get(id=2).authors.all() --output--> <QuerySet [<Author object: Jane Austen>, <Author object: Emily Dickinson>, <Author object: Fyodor Dostoevsky>, <Author object: William Shakespeare>, <Author object: Lau Tzu>]>
+
+Query: Find all the books that the 3rd author is part of
+>>> Author.objects.get(id=3).books.all()
+--output--> <QuerySet [<Book object: C# A Book about C-Sharp!>, <Book object: Java A Book about Java>, <Book object: Python A Book about Python3>, <Book object: PHP A Book about PHP>]>
+
+Query: Find all the authors that contributed to the 5th book	
+>>> Book.objects.get(id=5).authors.all()
+--output-->  <QuerySet [<Author object: William Shakespeare>]>
+	

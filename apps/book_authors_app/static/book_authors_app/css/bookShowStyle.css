@@ -1,0 +1,111 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    display: flex;
+    margin: 50px;
+    justify-content: space-around;
+}
+
+.AddBox{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(117, 153, 199);
+    background: rgb(white);
+    padding: 20px;
+    width: 30%;  
+}
+
+.AddBox2{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(117, 153, 199);
+    background: rgb(white);
+    padding: 20px;
+    width: 350px;
+}
+
+.AddBox2 input {
+    margin-bottom: 25px;
+    border: solid 1px rgb(117, 153, 199);
+    vertical-align: top;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: silver;
+    font-size: 48px;
+}
+
+h2 {
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 16px;
+}
+
+p {
+    display: inline-flex;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+ul {
+    list-style-position: inside;
+  }
+
+li {
+    padding-left: 28px;
+    margin-bottom: 8px;
+}
+
+.buttonRow {
+    margin: 15px auto;
+    align-content: center;
+}
+
+.button {
+    margin: 10px;
+}
+
+.descBox {
+    height: 200px;
+    width: 300px;
+    border: solid 1px rgb(117, 153, 199);
+}
+
+.LibraryTable {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(117, 153, 199);
+    background: rgb(white);
+    padding: 20px; 
+}
+
+.table {
+    border-spacing: 4px 10px;
+    display: flex;
+    justify-content: space-around; 
+    align-content: center;
+}
+
+tr, th, td{
+    border: 1px solid rgb(117, 153, 199);
+    background: white;
+    padding: 3px 25px;
+    text-align: center;
+    margin: auto;
+}
+
+tbody {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}

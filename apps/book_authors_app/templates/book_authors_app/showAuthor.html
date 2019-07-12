@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title></title>
+        <meta charset="utf-8">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'book_authors_app/css/authorShowStyle.css' %}">
+	</head>
+    <body>
+        <div class="container">
+            <div class="AddBox">
+                <h1>Name: </h1>
+                <h1>{{authorShow.first_name}} {{authorShow.last_name}}</h1>
+                <h2>Author ID: <span>{{authorShow.id}}</span></h2>
+                <h3>Author Notes:</h3><p>{{authorShow.notes}}</p>
+                <ul><h3>Books Authored:</h3>
+                {% for book in authorBooks %}
+                   <li><a href="/books/{{book.id}}">{{book.title}}</a></li> 
+                {% endfor %}
+                </ul>
+
+                <form action="/authors/{{authorShow.id}}/edit" method="post">
+                    {% csrf_token %}
+                    <h4>Add Book</h4>
+                    <select name="book">
+                        {% for book in notBooks %}
+                            <option value="{{book.id}}">{{book.title}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Add Book To Author">
+                </form>
+            </div>
+
+
+            <div class="AddBox2">
+                <form action="/authors/{{authorShow.id}}/update" method="POST">
+                {%csrf_token%}
+                    <h1>Update Author Information</h1>
+                    <h4>Updated First Name:</h4>
+                    <input type="text" name="updateFirstName">
+                    <h4>Updated Last Name:</h4>
+                    <input type="text" name="updateLastName">
+                    <h4>Updated Author Notes:</h4>
+                    <textarea name="updateNotes" class="descBox"></textarea>
+                    <input type="submit" value="Update Author Information" class="button">
+                </form>
+            </div>
+
+
+            <div class="LibraryTable">
+                <h1>Authors in Library</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Author Name</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for author in authors%}
+                    <tr>
+                        <td>{{author.id}}</td>
+                        <td>{{author.first_name}} {{author.last_name}}</td>
+                        <td class="action"><a href="/authors/{{author.id}}">Learn More</a></td>
+                    </tr>
+                    {% endfor %}    
+                </table>
+            </div>
+        </div>
+        
+    </body>
+</html>
